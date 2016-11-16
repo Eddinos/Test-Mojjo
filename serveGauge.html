@@ -1,0 +1,28 @@
+<div class="serve-gauge-table">
+  <uib-tabset active="2" justified="false">
+      <uib-tab ng-repeat="(index, service) in player.service_stats.slice().reverse()" index="$index+1" heading="{{$index==1?'1er Service':'2nd Service'}}" style="width:37%;float:right">
+        <div class="col-sm-3">
+          <table class="table">
+            <tr>
+              <td style="font-weight:bold">Retours in sur {{$index==1?'1er Service':'2nd Service'}}<br/><br/>
+                  {{player.name}}
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-sm-9">
+          <table class="table">
+            <tr>
+              <td ng-repeat="(key, value) in service" ng-class='{"col-sm-8":$first}'>{{value.heading}}</td>
+            </tr>
+            <tr>
+              <td ng-repeat="(key, value) in service">{{value.value*100/value.total | number:1}}% <sup>{{value.value}}/{{value.total}}</sup></td>
+            </tr>
+            <tr>
+              <td ng-repeat="(key, value) in service"><canvas class="gauge" gauge-drawing percentage="{{value.value*100/value.total}}"></canvas></td>
+            </tr>
+          </table>
+        </div>
+      </uib-tab>
+  </uib-tabset>
+</div>
